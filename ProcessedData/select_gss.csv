@@ -1,0 +1,666 @@
+province,sex,age_range,education,n
+Alberta,Female,18-29,Graduate+,1
+Alberta,Female,18-29,Highschool,68
+Alberta,Female,18-29,"NA",1
+Alberta,Female,18-29,No Highschool,6
+Alberta,Female,18-29,Undergraduate,17
+Alberta,Female,30-39,Graduate+,24
+Alberta,Female,30-39,Highschool,107
+Alberta,Female,30-39,"NA",4
+Alberta,Female,30-39,No Highschool,8
+Alberta,Female,30-39,Undergraduate,51
+Alberta,Female,40-49,Graduate+,16
+Alberta,Female,40-49,Highschool,83
+Alberta,Female,40-49,"NA",5
+Alberta,Female,40-49,No Highschool,2
+Alberta,Female,40-49,Undergraduate,41
+Alberta,Female,50-59,Graduate+,8
+Alberta,Female,50-59,Highschool,107
+Alberta,Female,50-59,"NA",3
+Alberta,Female,50-59,No Highschool,8
+Alberta,Female,50-59,Undergraduate,25
+Alberta,Female,60-69,Graduate+,13
+Alberta,Female,60-69,Highschool,109
+Alberta,Female,60-69,"NA",3
+Alberta,Female,60-69,No Highschool,11
+Alberta,Female,60-69,Undergraduate,26
+Alberta,Female,70-79,Graduate+,7
+Alberta,Female,70-79,Highschool,62
+Alberta,Female,70-79,"NA",5
+Alberta,Female,70-79,No Highschool,20
+Alberta,Female,70-79,Undergraduate,16
+Alberta,Female,80-89,Highschool,26
+Alberta,Female,80-89,"NA",1
+Alberta,Female,80-89,No Highschool,15
+Alberta,Female,80-89,Undergraduate,5
+Alberta,Male,18-29,Graduate+,2
+Alberta,Male,18-29,Highschool,63
+Alberta,Male,18-29,"NA",2
+Alberta,Male,18-29,No Highschool,7
+Alberta,Male,18-29,Undergraduate,17
+Alberta,Male,30-39,Graduate+,18
+Alberta,Male,30-39,Highschool,96
+Alberta,Male,30-39,"NA",3
+Alberta,Male,30-39,No Highschool,5
+Alberta,Male,30-39,Undergraduate,32
+Alberta,Male,40-49,Graduate+,20
+Alberta,Male,40-49,Highschool,72
+Alberta,Male,40-49,No Highschool,7
+Alberta,Male,40-49,Undergraduate,30
+Alberta,Male,50-59,Graduate+,10
+Alberta,Male,50-59,Highschool,108
+Alberta,Male,50-59,"NA",1
+Alberta,Male,50-59,No Highschool,14
+Alberta,Male,50-59,Undergraduate,23
+Alberta,Male,60-69,Graduate+,13
+Alberta,Male,60-69,Highschool,78
+Alberta,Male,60-69,"NA",1
+Alberta,Male,60-69,No Highschool,16
+Alberta,Male,60-69,Undergraduate,25
+Alberta,Male,70-79,Graduate+,12
+Alberta,Male,70-79,Highschool,51
+Alberta,Male,70-79,No Highschool,22
+Alberta,Male,70-79,Undergraduate,11
+Alberta,Male,80-89,Graduate+,1
+Alberta,Male,80-89,Highschool,20
+Alberta,Male,80-89,No Highschool,12
+Alberta,Male,80-89,Undergraduate,2
+British Columbia,Female,18-29,Graduate+,1
+British Columbia,Female,18-29,Highschool,70
+British Columbia,Female,18-29,"NA",3
+British Columbia,Female,18-29,No Highschool,3
+British Columbia,Female,18-29,Undergraduate,29
+British Columbia,Female,30-39,Graduate+,38
+British Columbia,Female,30-39,Highschool,89
+British Columbia,Female,30-39,"NA",5
+British Columbia,Female,30-39,No Highschool,6
+British Columbia,Female,30-39,Undergraduate,49
+British Columbia,Female,40-49,Graduate+,24
+British Columbia,Female,40-49,Highschool,98
+British Columbia,Female,40-49,"NA",1
+British Columbia,Female,40-49,No Highschool,10
+British Columbia,Female,40-49,Undergraduate,64
+British Columbia,Female,50-59,Graduate+,30
+British Columbia,Female,50-59,Highschool,131
+British Columbia,Female,50-59,"NA",3
+British Columbia,Female,50-59,No Highschool,11
+British Columbia,Female,50-59,Undergraduate,50
+British Columbia,Female,60-69,Graduate+,30
+British Columbia,Female,60-69,Highschool,176
+British Columbia,Female,60-69,"NA",6
+British Columbia,Female,60-69,No Highschool,18
+British Columbia,Female,60-69,Undergraduate,56
+British Columbia,Female,70-79,Graduate+,16
+British Columbia,Female,70-79,Highschool,116
+British Columbia,Female,70-79,"NA",4
+British Columbia,Female,70-79,No Highschool,29
+British Columbia,Female,70-79,Undergraduate,30
+British Columbia,Female,80-89,Graduate+,7
+British Columbia,Female,80-89,Highschool,84
+British Columbia,Female,80-89,"NA",1
+British Columbia,Female,80-89,No Highschool,34
+British Columbia,Female,80-89,Undergraduate,10
+British Columbia,Male,18-29,Graduate+,4
+British Columbia,Male,18-29,Highschool,82
+British Columbia,Male,18-29,"NA",2
+British Columbia,Male,18-29,No Highschool,7
+British Columbia,Male,18-29,Undergraduate,14
+British Columbia,Male,30-39,Graduate+,4
+British Columbia,Male,30-39,Highschool,100
+British Columbia,Male,30-39,"NA",5
+British Columbia,Male,30-39,No Highschool,7
+British Columbia,Male,30-39,Undergraduate,61
+British Columbia,Male,40-49,Graduate+,18
+British Columbia,Male,40-49,Highschool,96
+British Columbia,Male,40-49,"NA",4
+British Columbia,Male,40-49,No Highschool,7
+British Columbia,Male,40-49,Undergraduate,34
+British Columbia,Male,50-59,Graduate+,22
+British Columbia,Male,50-59,Highschool,102
+British Columbia,Male,50-59,"NA",4
+British Columbia,Male,50-59,No Highschool,20
+British Columbia,Male,50-59,Undergraduate,33
+British Columbia,Male,60-69,Graduate+,28
+British Columbia,Male,60-69,Highschool,133
+British Columbia,Male,60-69,"NA",1
+British Columbia,Male,60-69,No Highschool,24
+British Columbia,Male,60-69,Undergraduate,43
+British Columbia,Male,70-79,Graduate+,28
+British Columbia,Male,70-79,Highschool,116
+British Columbia,Male,70-79,"NA",1
+British Columbia,Male,70-79,No Highschool,22
+British Columbia,Male,70-79,Undergraduate,35
+British Columbia,Male,80-89,Graduate+,7
+British Columbia,Male,80-89,Highschool,38
+British Columbia,Male,80-89,"NA",1
+British Columbia,Male,80-89,No Highschool,28
+British Columbia,Male,80-89,Undergraduate,12
+Manitoba,Female,18-29,Highschool,36
+Manitoba,Female,18-29,"NA",3
+Manitoba,Female,18-29,No Highschool,7
+Manitoba,Female,18-29,Undergraduate,9
+Manitoba,Female,30-39,Graduate+,10
+Manitoba,Female,30-39,Highschool,58
+Manitoba,Female,30-39,"NA",3
+Manitoba,Female,30-39,No Highschool,9
+Manitoba,Female,30-39,Undergraduate,28
+Manitoba,Female,40-49,Graduate+,9
+Manitoba,Female,40-49,Highschool,45
+Manitoba,Female,40-49,"NA",2
+Manitoba,Female,40-49,No Highschool,4
+Manitoba,Female,40-49,Undergraduate,21
+Manitoba,Female,50-59,Graduate+,5
+Manitoba,Female,50-59,Highschool,58
+Manitoba,Female,50-59,"NA",1
+Manitoba,Female,50-59,No Highschool,3
+Manitoba,Female,50-59,Undergraduate,16
+Manitoba,Female,60-69,Graduate+,12
+Manitoba,Female,60-69,Highschool,86
+Manitoba,Female,60-69,"NA",5
+Manitoba,Female,60-69,No Highschool,13
+Manitoba,Female,60-69,Undergraduate,19
+Manitoba,Female,70-79,Graduate+,2
+Manitoba,Female,70-79,Highschool,56
+Manitoba,Female,70-79,"NA",1
+Manitoba,Female,70-79,No Highschool,27
+Manitoba,Female,70-79,Undergraduate,7
+Manitoba,Female,80-89,Graduate+,2
+Manitoba,Female,80-89,Highschool,29
+Manitoba,Female,80-89,"NA",2
+Manitoba,Female,80-89,No Highschool,29
+Manitoba,Female,80-89,Undergraduate,5
+Manitoba,Male,18-29,Highschool,40
+Manitoba,Male,18-29,"NA",1
+Manitoba,Male,18-29,No Highschool,3
+Manitoba,Male,18-29,Undergraduate,8
+Manitoba,Male,30-39,Graduate+,9
+Manitoba,Male,30-39,Highschool,49
+Manitoba,Male,30-39,"NA",4
+Manitoba,Male,30-39,No Highschool,8
+Manitoba,Male,30-39,Undergraduate,20
+Manitoba,Male,40-49,Graduate+,2
+Manitoba,Male,40-49,Highschool,50
+Manitoba,Male,40-49,"NA",1
+Manitoba,Male,40-49,No Highschool,4
+Manitoba,Male,40-49,Undergraduate,20
+Manitoba,Male,50-59,Graduate+,6
+Manitoba,Male,50-59,Highschool,50
+Manitoba,Male,50-59,No Highschool,17
+Manitoba,Male,50-59,Undergraduate,10
+Manitoba,Male,60-69,Graduate+,7
+Manitoba,Male,60-69,Highschool,65
+Manitoba,Male,60-69,"NA",1
+Manitoba,Male,60-69,No Highschool,29
+Manitoba,Male,60-69,Undergraduate,9
+Manitoba,Male,70-79,Graduate+,6
+Manitoba,Male,70-79,Highschool,38
+Manitoba,Male,70-79,"NA",2
+Manitoba,Male,70-79,No Highschool,28
+Manitoba,Male,70-79,Undergraduate,14
+Manitoba,Male,80-89,Graduate+,1
+Manitoba,Male,80-89,Highschool,24
+Manitoba,Male,80-89,No Highschool,17
+Manitoba,Male,80-89,Undergraduate,6
+New Brunswick,Female,18-29,Graduate+,5
+New Brunswick,Female,18-29,Highschool,38
+New Brunswick,Female,18-29,"NA",1
+New Brunswick,Female,18-29,No Highschool,3
+New Brunswick,Female,18-29,Undergraduate,9
+New Brunswick,Female,30-39,Graduate+,8
+New Brunswick,Female,30-39,Highschool,58
+New Brunswick,Female,30-39,"NA",4
+New Brunswick,Female,30-39,No Highschool,2
+New Brunswick,Female,30-39,Undergraduate,19
+New Brunswick,Female,40-49,Graduate+,10
+New Brunswick,Female,40-49,Highschool,59
+New Brunswick,Female,40-49,No Highschool,1
+New Brunswick,Female,40-49,Undergraduate,30
+New Brunswick,Female,50-59,Graduate+,8
+New Brunswick,Female,50-59,Highschool,93
+New Brunswick,Female,50-59,"NA",1
+New Brunswick,Female,50-59,No Highschool,11
+New Brunswick,Female,50-59,Undergraduate,18
+New Brunswick,Female,60-69,Graduate+,8
+New Brunswick,Female,60-69,Highschool,108
+New Brunswick,Female,60-69,"NA",1
+New Brunswick,Female,60-69,No Highschool,25
+New Brunswick,Female,60-69,Undergraduate,24
+New Brunswick,Female,70-79,Graduate+,10
+New Brunswick,Female,70-79,Highschool,61
+New Brunswick,Female,70-79,"NA",3
+New Brunswick,Female,70-79,No Highschool,41
+New Brunswick,Female,70-79,Undergraduate,9
+New Brunswick,Female,80-89,Graduate+,1
+New Brunswick,Female,80-89,Highschool,36
+New Brunswick,Female,80-89,No Highschool,29
+New Brunswick,Female,80-89,Undergraduate,5
+New Brunswick,Male,18-29,Highschool,25
+New Brunswick,Male,18-29,No Highschool,3
+New Brunswick,Male,18-29,Undergraduate,6
+New Brunswick,Male,30-39,Graduate+,6
+New Brunswick,Male,30-39,Highschool,47
+New Brunswick,Male,30-39,"NA",1
+New Brunswick,Male,30-39,No Highschool,2
+New Brunswick,Male,30-39,Undergraduate,12
+New Brunswick,Male,40-49,Graduate+,9
+New Brunswick,Male,40-49,Highschool,53
+New Brunswick,Male,40-49,"NA",3
+New Brunswick,Male,40-49,No Highschool,7
+New Brunswick,Male,40-49,Undergraduate,19
+New Brunswick,Male,50-59,Graduate+,10
+New Brunswick,Male,50-59,Highschool,66
+New Brunswick,Male,50-59,"NA",3
+New Brunswick,Male,50-59,No Highschool,9
+New Brunswick,Male,50-59,Undergraduate,18
+New Brunswick,Male,60-69,Graduate+,9
+New Brunswick,Male,60-69,Highschool,82
+New Brunswick,Male,60-69,No Highschool,28
+New Brunswick,Male,60-69,Undergraduate,18
+New Brunswick,Male,70-79,Graduate+,7
+New Brunswick,Male,70-79,Highschool,51
+New Brunswick,Male,70-79,No Highschool,28
+New Brunswick,Male,70-79,Undergraduate,12
+New Brunswick,Male,80-89,Graduate+,6
+New Brunswick,Male,80-89,Highschool,8
+New Brunswick,Male,80-89,"NA",1
+New Brunswick,Male,80-89,No Highschool,22
+Newfoundland and Labrador,Female,18-29,Graduate+,1
+Newfoundland and Labrador,Female,18-29,Highschool,31
+Newfoundland and Labrador,Female,18-29,"NA",2
+Newfoundland and Labrador,Female,18-29,No Highschool,2
+Newfoundland and Labrador,Female,18-29,Undergraduate,11
+Newfoundland and Labrador,Female,30-39,Graduate+,14
+Newfoundland and Labrador,Female,30-39,Highschool,38
+Newfoundland and Labrador,Female,30-39,No Highschool,1
+Newfoundland and Labrador,Female,30-39,Undergraduate,31
+Newfoundland and Labrador,Female,40-49,Graduate+,8
+Newfoundland and Labrador,Female,40-49,Highschool,52
+Newfoundland and Labrador,Female,40-49,No Highschool,4
+Newfoundland and Labrador,Female,40-49,Undergraduate,18
+Newfoundland and Labrador,Female,50-59,Graduate+,3
+Newfoundland and Labrador,Female,50-59,Highschool,79
+Newfoundland and Labrador,Female,50-59,"NA",1
+Newfoundland and Labrador,Female,50-59,No Highschool,18
+Newfoundland and Labrador,Female,50-59,Undergraduate,8
+Newfoundland and Labrador,Female,60-69,Graduate+,15
+Newfoundland and Labrador,Female,60-69,Highschool,78
+Newfoundland and Labrador,Female,60-69,"NA",1
+Newfoundland and Labrador,Female,60-69,No Highschool,30
+Newfoundland and Labrador,Female,60-69,Undergraduate,18
+Newfoundland and Labrador,Female,70-79,Graduate+,1
+Newfoundland and Labrador,Female,70-79,Highschool,45
+Newfoundland and Labrador,Female,70-79,"NA",2
+Newfoundland and Labrador,Female,70-79,No Highschool,42
+Newfoundland and Labrador,Female,70-79,Undergraduate,8
+Newfoundland and Labrador,Female,80-89,Graduate+,3
+Newfoundland and Labrador,Female,80-89,Highschool,13
+Newfoundland and Labrador,Female,80-89,"NA",1
+Newfoundland and Labrador,Female,80-89,No Highschool,17
+Newfoundland and Labrador,Female,80-89,Undergraduate,3
+Newfoundland and Labrador,Male,18-29,Highschool,25
+Newfoundland and Labrador,Male,18-29,"NA",1
+Newfoundland and Labrador,Male,18-29,No Highschool,3
+Newfoundland and Labrador,Male,18-29,Undergraduate,8
+Newfoundland and Labrador,Male,30-39,Graduate+,7
+Newfoundland and Labrador,Male,30-39,Highschool,44
+Newfoundland and Labrador,Male,30-39,"NA",1
+Newfoundland and Labrador,Male,30-39,No Highschool,2
+Newfoundland and Labrador,Male,30-39,Undergraduate,19
+Newfoundland and Labrador,Male,40-49,Graduate+,5
+Newfoundland and Labrador,Male,40-49,Highschool,45
+Newfoundland and Labrador,Male,40-49,"NA",2
+Newfoundland and Labrador,Male,40-49,No Highschool,6
+Newfoundland and Labrador,Male,40-49,Undergraduate,8
+Newfoundland and Labrador,Male,50-59,Graduate+,6
+Newfoundland and Labrador,Male,50-59,Highschool,60
+Newfoundland and Labrador,Male,50-59,No Highschool,24
+Newfoundland and Labrador,Male,50-59,Undergraduate,11
+Newfoundland and Labrador,Male,60-69,Graduate+,2
+Newfoundland and Labrador,Male,60-69,Highschool,55
+Newfoundland and Labrador,Male,60-69,"NA",2
+Newfoundland and Labrador,Male,60-69,No Highschool,32
+Newfoundland and Labrador,Male,60-69,Undergraduate,12
+Newfoundland and Labrador,Male,70-79,Graduate+,6
+Newfoundland and Labrador,Male,70-79,Highschool,38
+Newfoundland and Labrador,Male,70-79,"NA",3
+Newfoundland and Labrador,Male,70-79,No Highschool,19
+Newfoundland and Labrador,Male,70-79,Undergraduate,4
+Newfoundland and Labrador,Male,80-89,Graduate+,1
+Newfoundland and Labrador,Male,80-89,Highschool,8
+Newfoundland and Labrador,Male,80-89,"NA",2
+Newfoundland and Labrador,Male,80-89,No Highschool,10
+Newfoundland and Labrador,Male,80-89,Undergraduate,2
+Nova Scotia,Female,18-29,Graduate+,3
+Nova Scotia,Female,18-29,Highschool,38
+Nova Scotia,Female,18-29,"NA",2
+Nova Scotia,Female,18-29,No Highschool,4
+Nova Scotia,Female,18-29,Undergraduate,7
+Nova Scotia,Female,30-39,Graduate+,9
+Nova Scotia,Female,30-39,Highschool,52
+Nova Scotia,Female,30-39,"NA",1
+Nova Scotia,Female,30-39,No Highschool,1
+Nova Scotia,Female,30-39,Undergraduate,30
+Nova Scotia,Female,40-49,Graduate+,18
+Nova Scotia,Female,40-49,Highschool,53
+Nova Scotia,Female,40-49,"NA",3
+Nova Scotia,Female,40-49,No Highschool,2
+Nova Scotia,Female,40-49,Undergraduate,29
+Nova Scotia,Female,50-59,Graduate+,10
+Nova Scotia,Female,50-59,Highschool,80
+Nova Scotia,Female,50-59,"NA",1
+Nova Scotia,Female,50-59,No Highschool,11
+Nova Scotia,Female,50-59,Undergraduate,21
+Nova Scotia,Female,60-69,Graduate+,19
+Nova Scotia,Female,60-69,Highschool,110
+Nova Scotia,Female,60-69,"NA",3
+Nova Scotia,Female,60-69,No Highschool,21
+Nova Scotia,Female,60-69,Undergraduate,20
+Nova Scotia,Female,70-79,Graduate+,5
+Nova Scotia,Female,70-79,Highschool,70
+Nova Scotia,Female,70-79,"NA",3
+Nova Scotia,Female,70-79,No Highschool,39
+Nova Scotia,Female,70-79,Undergraduate,20
+Nova Scotia,Female,80-89,Graduate+,3
+Nova Scotia,Female,80-89,Highschool,36
+Nova Scotia,Female,80-89,No Highschool,24
+Nova Scotia,Female,80-89,Undergraduate,5
+Nova Scotia,Male,18-29,Graduate+,2
+Nova Scotia,Male,18-29,Highschool,41
+Nova Scotia,Male,18-29,"NA",1
+Nova Scotia,Male,18-29,No Highschool,5
+Nova Scotia,Male,18-29,Undergraduate,12
+Nova Scotia,Male,30-39,Graduate+,4
+Nova Scotia,Male,30-39,Highschool,53
+Nova Scotia,Male,30-39,No Highschool,5
+Nova Scotia,Male,30-39,Undergraduate,31
+Nova Scotia,Male,40-49,Graduate+,9
+Nova Scotia,Male,40-49,Highschool,56
+Nova Scotia,Male,40-49,"NA",2
+Nova Scotia,Male,40-49,No Highschool,2
+Nova Scotia,Male,40-49,Undergraduate,23
+Nova Scotia,Male,50-59,Graduate+,16
+Nova Scotia,Male,50-59,Highschool,72
+Nova Scotia,Male,50-59,No Highschool,17
+Nova Scotia,Male,50-59,Undergraduate,18
+Nova Scotia,Male,60-69,Graduate+,7
+Nova Scotia,Male,60-69,Highschool,66
+Nova Scotia,Male,60-69,"NA",2
+Nova Scotia,Male,60-69,No Highschool,35
+Nova Scotia,Male,60-69,Undergraduate,23
+Nova Scotia,Male,70-79,Graduate+,16
+Nova Scotia,Male,70-79,Highschool,48
+Nova Scotia,Male,70-79,No Highschool,24
+Nova Scotia,Male,70-79,Undergraduate,17
+Nova Scotia,Male,80-89,Graduate+,3
+Nova Scotia,Male,80-89,Highschool,20
+Nova Scotia,Male,80-89,"NA",2
+Nova Scotia,Male,80-89,No Highschool,19
+Nova Scotia,Male,80-89,Undergraduate,3
+Ontario,Female,18-29,Graduate+,12
+Ontario,Female,18-29,Highschool,161
+Ontario,Female,18-29,"NA",1
+Ontario,Female,18-29,No Highschool,18
+Ontario,Female,18-29,Undergraduate,64
+Ontario,Female,30-39,Graduate+,79
+Ontario,Female,30-39,Highschool,202
+Ontario,Female,30-39,"NA",5
+Ontario,Female,30-39,No Highschool,11
+Ontario,Female,30-39,Undergraduate,137
+Ontario,Female,40-49,Graduate+,88
+Ontario,Female,40-49,Highschool,226
+Ontario,Female,40-49,"NA",6
+Ontario,Female,40-49,No Highschool,18
+Ontario,Female,40-49,Undergraduate,152
+Ontario,Female,50-59,Graduate+,58
+Ontario,Female,50-59,Highschool,309
+Ontario,Female,50-59,"NA",6
+Ontario,Female,50-59,No Highschool,24
+Ontario,Female,50-59,Undergraduate,116
+Ontario,Female,60-69,Graduate+,64
+Ontario,Female,60-69,Highschool,349
+Ontario,Female,60-69,"NA",9
+Ontario,Female,60-69,No Highschool,57
+Ontario,Female,60-69,Undergraduate,104
+Ontario,Female,70-79,Graduate+,35
+Ontario,Female,70-79,Highschool,266
+Ontario,Female,70-79,"NA",6
+Ontario,Female,70-79,No Highschool,93
+Ontario,Female,70-79,Undergraduate,73
+Ontario,Female,80-89,Graduate+,11
+Ontario,Female,80-89,Highschool,153
+Ontario,Female,80-89,"NA",7
+Ontario,Female,80-89,No Highschool,72
+Ontario,Female,80-89,Undergraduate,22
+Ontario,Male,18-29,Graduate+,13
+Ontario,Male,18-29,Highschool,162
+Ontario,Male,18-29,"NA",4
+Ontario,Male,18-29,No Highschool,12
+Ontario,Male,18-29,Undergraduate,36
+Ontario,Male,30-39,Graduate+,62
+Ontario,Male,30-39,Highschool,212
+Ontario,Male,30-39,"NA",6
+Ontario,Male,30-39,No Highschool,15
+Ontario,Male,30-39,Undergraduate,97
+Ontario,Male,40-49,Graduate+,60
+Ontario,Male,40-49,Highschool,196
+Ontario,Male,40-49,"NA",11
+Ontario,Male,40-49,No Highschool,11
+Ontario,Male,40-49,Undergraduate,113
+Ontario,Male,50-59,Graduate+,54
+Ontario,Male,50-59,Highschool,243
+Ontario,Male,50-59,"NA",11
+Ontario,Male,50-59,No Highschool,27
+Ontario,Male,50-59,Undergraduate,108
+Ontario,Male,60-69,Graduate+,57
+Ontario,Male,60-69,Highschool,290
+Ontario,Male,60-69,"NA",8
+Ontario,Male,60-69,No Highschool,53
+Ontario,Male,60-69,Undergraduate,79
+Ontario,Male,70-79,Graduate+,44
+Ontario,Male,70-79,Highschool,182
+Ontario,Male,70-79,"NA",5
+Ontario,Male,70-79,No Highschool,68
+Ontario,Male,70-79,Undergraduate,60
+Ontario,Male,80-89,Graduate+,23
+Ontario,Male,80-89,Highschool,73
+Ontario,Male,80-89,"NA",5
+Ontario,Male,80-89,No Highschool,52
+Ontario,Male,80-89,Undergraduate,18
+Prince Edward Island,Female,18-29,Highschool,20
+Prince Edward Island,Female,18-29,No Highschool,2
+Prince Edward Island,Female,18-29,Undergraduate,4
+Prince Edward Island,Female,30-39,Graduate+,3
+Prince Edward Island,Female,30-39,Highschool,29
+Prince Edward Island,Female,30-39,"NA",1
+Prince Edward Island,Female,30-39,No Highschool,2
+Prince Edward Island,Female,30-39,Undergraduate,15
+Prince Edward Island,Female,40-49,Graduate+,11
+Prince Edward Island,Female,40-49,Highschool,32
+Prince Edward Island,Female,40-49,"NA",2
+Prince Edward Island,Female,40-49,No Highschool,1
+Prince Edward Island,Female,40-49,Undergraduate,9
+Prince Edward Island,Female,50-59,Graduate+,6
+Prince Edward Island,Female,50-59,Highschool,44
+Prince Edward Island,Female,50-59,No Highschool,6
+Prince Edward Island,Female,50-59,Undergraduate,10
+Prince Edward Island,Female,60-69,Graduate+,6
+Prince Edward Island,Female,60-69,Highschool,74
+Prince Edward Island,Female,60-69,"NA",1
+Prince Edward Island,Female,60-69,No Highschool,8
+Prince Edward Island,Female,60-69,Undergraduate,8
+Prince Edward Island,Female,70-79,Graduate+,5
+Prince Edward Island,Female,70-79,Highschool,43
+Prince Edward Island,Female,70-79,"NA",1
+Prince Edward Island,Female,70-79,No Highschool,13
+Prince Edward Island,Female,70-79,Undergraduate,6
+Prince Edward Island,Female,80-89,Graduate+,2
+Prince Edward Island,Female,80-89,Highschool,21
+Prince Edward Island,Female,80-89,"NA",1
+Prince Edward Island,Female,80-89,No Highschool,16
+Prince Edward Island,Female,80-89,Undergraduate,4
+Prince Edward Island,Male,18-29,Highschool,27
+Prince Edward Island,Male,18-29,"NA",2
+Prince Edward Island,Male,18-29,No Highschool,4
+Prince Edward Island,Male,18-29,Undergraduate,2
+Prince Edward Island,Male,30-39,Graduate+,4
+Prince Edward Island,Male,30-39,Highschool,23
+Prince Edward Island,Male,30-39,No Highschool,1
+Prince Edward Island,Male,30-39,Undergraduate,10
+Prince Edward Island,Male,40-49,Graduate+,3
+Prince Edward Island,Male,40-49,Highschool,23
+Prince Edward Island,Male,40-49,"NA",2
+Prince Edward Island,Male,40-49,No Highschool,3
+Prince Edward Island,Male,40-49,Undergraduate,7
+Prince Edward Island,Male,50-59,Graduate+,5
+Prince Edward Island,Male,50-59,Highschool,34
+Prince Edward Island,Male,50-59,No Highschool,7
+Prince Edward Island,Male,50-59,Undergraduate,3
+Prince Edward Island,Male,60-69,Graduate+,7
+Prince Edward Island,Male,60-69,Highschool,39
+Prince Edward Island,Male,60-69,"NA",1
+Prince Edward Island,Male,60-69,No Highschool,12
+Prince Edward Island,Male,60-69,Undergraduate,14
+Prince Edward Island,Male,70-79,Graduate+,4
+Prince Edward Island,Male,70-79,Highschool,17
+Prince Edward Island,Male,70-79,"NA",1
+Prince Edward Island,Male,70-79,No Highschool,14
+Prince Edward Island,Male,70-79,Undergraduate,5
+Prince Edward Island,Male,80-89,Graduate+,1
+Prince Edward Island,Male,80-89,Highschool,2
+Prince Edward Island,Male,80-89,"NA",1
+Prince Edward Island,Male,80-89,No Highschool,6
+Prince Edward Island,Male,80-89,Undergraduate,1
+Quebec,Female,18-29,Graduate+,5
+Quebec,Female,18-29,Highschool,117
+Quebec,Female,18-29,"NA",6
+Quebec,Female,18-29,No Highschool,10
+Quebec,Female,18-29,Undergraduate,32
+Quebec,Female,30-39,Graduate+,39
+Quebec,Female,30-39,Highschool,148
+Quebec,Female,30-39,"NA",4
+Quebec,Female,30-39,No Highschool,14
+Quebec,Female,30-39,Undergraduate,95
+Quebec,Female,40-49,Graduate+,38
+Quebec,Female,40-49,Highschool,158
+Quebec,Female,40-49,"NA",2
+Quebec,Female,40-49,No Highschool,19
+Quebec,Female,40-49,Undergraduate,84
+Quebec,Female,50-59,Graduate+,23
+Quebec,Female,50-59,Highschool,202
+Quebec,Female,50-59,"NA",2
+Quebec,Female,50-59,No Highschool,43
+Quebec,Female,50-59,Undergraduate,56
+Quebec,Female,60-69,Graduate+,23
+Quebec,Female,60-69,Highschool,282
+Quebec,Female,60-69,"NA",6
+Quebec,Female,60-69,No Highschool,68
+Quebec,Female,60-69,Undergraduate,48
+Quebec,Female,70-79,Graduate+,13
+Quebec,Female,70-79,Highschool,156
+Quebec,Female,70-79,"NA",10
+Quebec,Female,70-79,No Highschool,124
+Quebec,Female,70-79,Undergraduate,39
+Quebec,Female,80-89,Graduate+,1
+Quebec,Female,80-89,Highschool,74
+Quebec,Female,80-89,"NA",2
+Quebec,Female,80-89,No Highschool,84
+Quebec,Female,80-89,Undergraduate,9
+Quebec,Male,18-29,Graduate+,4
+Quebec,Male,18-29,Highschool,110
+Quebec,Male,18-29,"NA",2
+Quebec,Male,18-29,No Highschool,32
+Quebec,Male,18-29,Undergraduate,14
+Quebec,Male,30-39,Graduate+,38
+Quebec,Male,30-39,Highschool,167
+Quebec,Male,30-39,"NA",5
+Quebec,Male,30-39,No Highschool,15
+Quebec,Male,30-39,Undergraduate,70
+Quebec,Male,40-49,Graduate+,29
+Quebec,Male,40-49,Highschool,157
+Quebec,Male,40-49,"NA",1
+Quebec,Male,40-49,No Highschool,27
+Quebec,Male,40-49,Undergraduate,60
+Quebec,Male,50-59,Graduate+,23
+Quebec,Male,50-59,Highschool,185
+Quebec,Male,50-59,"NA",7
+Quebec,Male,50-59,No Highschool,41
+Quebec,Male,50-59,Undergraduate,45
+Quebec,Male,60-69,Graduate+,32
+Quebec,Male,60-69,Highschool,194
+Quebec,Male,60-69,"NA",2
+Quebec,Male,60-69,No Highschool,60
+Quebec,Male,60-69,Undergraduate,43
+Quebec,Male,70-79,Graduate+,22
+Quebec,Male,70-79,Highschool,92
+Quebec,Male,70-79,"NA",6
+Quebec,Male,70-79,No Highschool,83
+Quebec,Male,70-79,Undergraduate,44
+Quebec,Male,80-89,Graduate+,14
+Quebec,Male,80-89,Highschool,31
+Quebec,Male,80-89,"NA",3
+Quebec,Male,80-89,No Highschool,40
+Quebec,Male,80-89,Undergraduate,11
+Saskatchewan,Female,18-29,Graduate+,1
+Saskatchewan,Female,18-29,Highschool,35
+Saskatchewan,Female,18-29,"NA",2
+Saskatchewan,Female,18-29,No Highschool,7
+Saskatchewan,Female,18-29,Undergraduate,12
+Saskatchewan,Female,30-39,Graduate+,7
+Saskatchewan,Female,30-39,Highschool,68
+Saskatchewan,Female,30-39,"NA",5
+Saskatchewan,Female,30-39,No Highschool,5
+Saskatchewan,Female,30-39,Undergraduate,26
+Saskatchewan,Female,40-49,Graduate+,7
+Saskatchewan,Female,40-49,Highschool,41
+Saskatchewan,Female,40-49,Undergraduate,26
+Saskatchewan,Female,50-59,Graduate+,1
+Saskatchewan,Female,50-59,Highschool,56
+Saskatchewan,Female,50-59,"NA",2
+Saskatchewan,Female,50-59,No Highschool,9
+Saskatchewan,Female,50-59,Undergraduate,7
+Saskatchewan,Female,60-69,Graduate+,2
+Saskatchewan,Female,60-69,Highschool,81
+Saskatchewan,Female,60-69,"NA",1
+Saskatchewan,Female,60-69,No Highschool,16
+Saskatchewan,Female,60-69,Undergraduate,11
+Saskatchewan,Female,70-79,Graduate+,5
+Saskatchewan,Female,70-79,Highschool,51
+Saskatchewan,Female,70-79,"NA",1
+Saskatchewan,Female,70-79,No Highschool,14
+Saskatchewan,Female,70-79,Undergraduate,12
+Saskatchewan,Female,80-89,Graduate+,1
+Saskatchewan,Female,80-89,Highschool,37
+Saskatchewan,Female,80-89,"NA",3
+Saskatchewan,Female,80-89,No Highschool,31
+Saskatchewan,Female,80-89,Undergraduate,5
+Saskatchewan,Male,18-29,Highschool,40
+Saskatchewan,Male,18-29,No Highschool,8
+Saskatchewan,Male,18-29,Undergraduate,3
+Saskatchewan,Male,30-39,Graduate+,6
+Saskatchewan,Male,30-39,Highschool,75
+Saskatchewan,Male,30-39,No Highschool,1
+Saskatchewan,Male,30-39,Undergraduate,33
+Saskatchewan,Male,40-49,Graduate+,6
+Saskatchewan,Male,40-49,Highschool,52
+Saskatchewan,Male,40-49,"NA",2
+Saskatchewan,Male,40-49,No Highschool,5
+Saskatchewan,Male,40-49,Undergraduate,5
+Saskatchewan,Male,50-59,Graduate+,3
+Saskatchewan,Male,50-59,Highschool,55
+Saskatchewan,Male,50-59,"NA",3
+Saskatchewan,Male,50-59,No Highschool,9
+Saskatchewan,Male,50-59,Undergraduate,12
+Saskatchewan,Male,60-69,Graduate+,8
+Saskatchewan,Male,60-69,Highschool,69
+Saskatchewan,Male,60-69,"NA",2
+Saskatchewan,Male,60-69,No Highschool,14
+Saskatchewan,Male,60-69,Undergraduate,9
+Saskatchewan,Male,70-79,Graduate+,5
+Saskatchewan,Male,70-79,Highschool,43
+Saskatchewan,Male,70-79,"NA",3
+Saskatchewan,Male,70-79,No Highschool,17
+Saskatchewan,Male,70-79,Undergraduate,8
+Saskatchewan,Male,80-89,Graduate+,4
+Saskatchewan,Male,80-89,Highschool,12
+Saskatchewan,Male,80-89,No Highschool,20
+Saskatchewan,Male,80-89,Undergraduate,5

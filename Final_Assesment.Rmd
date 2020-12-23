@@ -1,0 +1,450 @@
+---
+title: "Final assignment STA304: An Investigation into Voter Turnout in 2019 Federal Election"
+author: "Benjamin Zhang"
+date: "09/12/2020"
+output: pdf_document
+---
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+
+#Work Place Set-up
+setwd("C:/Users/longh/OneDrive/Documents/STA304/Final_assignment_Sta304")
+library(tidyverse)
+library(brms)
+library(broom)
+library(lme4)
+library(knitr)
+library(reshape2)
+library(tableone)
+
+
+# Loading in the cleaned survey Data
+ces_data <- read_csv("ProcessedData/cesR.csv")
+# Loading in the cleaned census Data
+gss_data <- read_csv("ProcessedData/select_gss.csv")
+
+
+#matching CES survey education data with GSS education data 
+ces_data$education[ces_data$education == "No schooling" ] <- "No Highschool"
+ces_data$education[ces_data$education == "Some elementary school"] <- "No Highschool"
+ces_data$education[ces_data$education == "Completed elementary school"] <- "No Highschool"
+ces_data$education[ces_data$education == "Some secondary/ high school"] <- "No Highschool"
+ces_data$education[ces_data$education == "Completed secondary/ high school"] <- "Highschool"
+ces_data$education[ces_data$education == "Some technical, community college, CEGEP, College Classique"] <- "Highschool"
+ces_data$education[ces_data$education == "Completed technical, community college, CEGEP, College Classique"] <- "Highschool"
+ces_data$education[ces_data$education == "Some university"] <- "Highschool"
+ces_data$education[ces_data$education == "Bachelor's degree"] <- "Undergraduate"
+ces_data$education[ces_data$education == "Master's degree"]<- "Graduate+"
+ces_data$education[ces_data$education == "Professional degree or doctorate"]<- "Graduate+"
+
+ces_data$education[ces_data$education == "Don't know/ Prefer not to answer"]<- "NA"
+
+
+
+
+gss_data$education[is.na(gss_data$education)] <- 'NA'
+
+```
+## Abstract
+Voting is a key aspect of civic engagement. Over the years voter turnout has declined, and with it the overall health of the democracies that practice fair voting systems (Pammett and Leduc 2003). In the 2019 Canadian federal election, the Liberals won a minority government despite losing the popular vote to the Conservatives. Given that only 67.7% of all Canadians voted in the election, speculation on the overall suitability Liberal government has been in question. Using a multilevel regression model with poststratification (MRP), we aimed to simulate a hypothetical scenario where voter outcome of the 2019 Candian election was 100%. In this simulation, data from the Canadian Election Study (CES) was collected and stratified using Canadian General Social Survey (GSS) to generate voting outcomes of both the Liberals and the Conservatives. Then, model results were compared to the actual election results to evaluate the impacts of voter turnout of the 2019 federal election. 
+
+
+## Keywords
+Multi-Level Regression, MRP, Postratification, Canada, 2019 Federal Election, Canadian election study, Canadian general social survey, Voter turnout, Modeling hypothetical scenario
+
+
+## Introduction
+
+Voter turnout plays a significant impact on the overall results of an election. In many western democracies, voting is nonobligatory and citizens are free to decide if they wish to participate in an election. However non-compulsory voting has often resulted in unfavourable voter turnouts. In the past few decades, voter outcomes within the US (65.4%), Switzerland (44.3%), and Canada (67.7%) have been declining (Institute for Democracy and Electoral Assistance 2018). As a result this difference may cause a misrepresentation of the overall ideologies and beliefs of a nation and result in poor government and ineffective policies.
+
+In Canada, we have a non-compulsory voting system. Individuals of age 18 or older with a canadian citizenship are capable of participating on election day. In 2019, the Liberals won a minority government despite having lost the popular vote, receiving less than 35% of the popular vote, making them the government with lowest percentage national popular vote of any other governing party in Canadian history. Given that the Liberals won by such a small margin, would increased voter participation have shifted the right of government to the Conservatives? Currently, it is unclear the extent of which this discrepancy is due to voter turnouts. Given that nearly 33% of Canadians didn’t vote in the 2019 election, we wish to investigate a scenario where voter turnout was at 100%.
+
+One such method to simulate a 2019 with complete voter participation would be to use a multilevel regression model with post-stratification (MRP). Currently MRP is a popular technique to extrapolate on surveys by adjusting for non-representative samples using census data. The MRP technique first generates a multilevel regression model based on survey data, taking input variables from the survey to predict a certain outcome. After stratifying the census data based on the independent variables in the model, the multilevel model is applied to the census data. The outcome value of each strata is then weighted based on the number of individuals within the group in order to generate a representative outcome based on the census data. Thus, by taking survey web data obtained from the 2019 Canadian Election Study (CESweb) and post-stratification data from the 2017 Candian general social survey (GSS), we’d be able to generate an MRP estimate of the results of 2019 if every eligible candian citizen participated.  
+
+In this study, we will take CESweb data obtained through non-probability based-sampling and adjust it using multilevel regression with post-stratification using GSS survey data to simulate a hypothetical election where voter turnout was 100%. In this manner, we will be able to compare the actual 2019 ridings  with that of our modeled hypothetical results and determine the impact of voter outcome. In the Methodology section (Section 2), I describe both the survey and poststratification data sets and the specifics of our MRP that we will use to simulate 2019 voting outcomes. The results of our MRP will then be shown in the Results section  (Section 3) and further discussion about results would occur in the Conclusion section (Section 4). 
+
+
+
+
+## Methodology
+#Data
+
+To perform multilevel regression analysis, survey and post stratification data are required. In our study we used web survey data from the 2019 Canadian Elections Study (Stephenson et. Al 2020), accessing it through the cesR library in R (Hodgetts & Alexander 2020). The CESweb data set contains a wide array of information about voters, including respondent’s gender, year of birth, education, province, and primary vote choice.  The following Table1 is a processed preview of the 2019 cesR web data with age being calculated from year of birth. 
+
+```{r, echo = FALSE}
+ces_preview <- head(ces_data, 10)
+ces_preview <- ces_preview %>%
+  select(province, age, sex, education,Vote,Voting_Interest) %>%
+  rename(gender = sex)
+
+#For some reason I have a bug and I can't redownload ces2019web data anymore after I 
+#removed it from my environment, please accept this as a sufficient summary table of the survey data. 
+kable(ces_preview, caption = "Table 1: Brief Summary of the Processed CESweb datavalues" )
+
+#Mapping gender to sex, we convert all "Others" into female, a limitation to our study
+ces_data$sex[ces_data$sex == "A man"] <- "Male"
+ces_data$sex[ces_data$sex == "A woman"] <- "Female"
+
+```
+CESweb contains vote choice, however, a significant number of these inputs contain “Don’t know values”  where respondents don’t provide a definitive voting preference. Thus such non-specified data inputs are challenging to use as voting predictors, and possibly leave out valuable information about these individual’s voting preferences. Although not apparent in Table1, another interesting feature of this data set is that gender is recorded as a non-binary value, including an additional input for “Other”.  “Other” values make up roughly 0.1% of the data values for Gender and potentially posing challenges when mapping gender to sex. Overall, the use of CESweb data enables stratification of potential voters of the 2019 federal election based on gender, year of birth, education, and province, allowing for potential in-depth analysis of the voting patterns within each strata. 
+
+To post stratify CESweb data, information from the 2017 Canadian General Social Survey (GSS) was used in this study. The GSS data is a randomly sampled data set obtained by the Government of Canada for the purpose of modeling changes in the living conditions and well being of Canadians, and provide significant insights on specific social policy issues. As a result, the GSS contains a very general description of the overall livelihoods of canadians, providing information such as age, sex, education, family income, family size and place of housing.  GSS data was collected via Random Digit Dialling sampling from a subpopulation of Canadians aged 15 and older living in private households in the 10 provinces. With a total of over 20,000 recorded responses, basic estimates on the national, provincial levels are possible making it a valuable alternative to census data (Statistics Canada 2019).
+
+Overall, not many shared variables exist between the survey and post-stratification data other than general information on the respondent's age and degree of education. Gender from the survey data can be mapped to sex, however the process is difficult and without accurate solutions (Kennedy et. AL 2020). Specifically in our model we decided to include gender, and mapped all “Other” genders to females. Given their small presence in the data set, we assume that their impact on final results would be negligible 
+
+
+
+#Model
+
+To determine the impact of voter turnout on the 2019 federal election, we wish to simulate the voting outcome for both Liberals and Conservatives when voting outcome . Eligible voters were first grouped by province and then stratified into cells based on age, education and gender. Then, two multilevel logistic regression models were built to simulate the voting preferences of Canadian citizens. One predicting the percentage of Liberal supporters in a strata, and another predicting the percentage of Conservative supporters in a strata. These first level logistic regression models were constructed using 2019 CESweb survey data and used age range, education, and sex to predict the probability of a given individual to vote Liberal or Conservative. 
+
+$$ \widehat{y}  =\log(\frac{p_{vote}}{1-p_{vote}}) = \beta_0+\beta_1  x_{age\_range} +\beta_2  x_{sex}+ \beta_3x_{education} + \epsilon$$
+$$\beta_0 = r_{0} + r_{1}w_{province} + u $$
+This is the general model applied to model for both Liberal and Conservative voting outcomes. The first equation is the first level equation, where $y$ represents the value inputted into a sigmoid function to obtain the probability of a certain strata of voter to vote Liberal or Conservative. $\beta_0$ represents the intercept of the logistic model in a given province, and is the probability of voting Liberal or Conservative when an individual is female, between the ages of 18-29, and has received Graduate level education or more. Additionally, $\beta_1$ represents the slope of the model for each age range, $\beta_2$ represents the slope of the model for sex, $\beta_3$ represents the slope of the model for each education bracket, and $\epsilon$ is the error of the model. The second level equation models for $\beta_0$, where $\beta_0$ is dependent on province. $r_{0}$ is the respective intercept of the model, $r_{1}$ is the slope of the model based on province and $u$ is the error for the model.
+
+
+To simulate the 2019 Canadian election with 100% voter turnout, post-stratification was performed. GSS data was used to extrapolate on the logistic regression models built in the previous section. To do this, our multilevel model was used to predict the voting outcomes of each cell of the GSS census data, aggregated by province, age, sex, and education. Next, each cell’s predicted estimate was weighted by its respective population from the census data. Thus, results from this poststratification were capable of predicting how people in each cell would vote based on their province, age, sex, and amount of education. 
+
+
+$$\hat{y}^{PS} =\frac{\sum N_j \hat{y_j}}{\sum N_j}$$
+Where $\hat{y}^{PS}$ represents the percentage of the popular vote a given party, Liberals or Conservatives, would receive in our 100% vote turnout model. $N_j$ represented the number of individuals in each cell $j$, and $\hat{y_j}$ is the predicted voting probability for each individual in the cell based on the given logistic regression model.
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+#Generating both frequentist logisitcal regression models one for Liberals, one for Conservatives 
+
+#Frequentist model for voting Liberals  
+model1 <- glmer(Vote_Liberal ~ age_range + education + sex +
+               (1|province), data = ces_data, family = binomial)
+
+
+#Frequentist model for voting Conservatives
+model2 <- glmer(Vote_Conservative ~ age_range + education + sex +
+               (1|province), data = ces_data, family = binomial)
+
+#intercept for both models, Female, 18-29, Graduate education. 
+
+```
+Logistic regression models tend to be more robust than linear regression models when predicting binomial outcomes. The purpose of our study is to assess the likelihood of a selected individual from a specific strata in voting Liberal or Conservative. As a result, modeling using a logistic regression is preferred. In the model, education was incorporated as a categorical variable based on whether the respondent had obtained a highschool diploma, undergraduate degree, or a graduate degree or more and allowed us to view voting preferences based on degree of education. Despite being a continuous variable in both CESweb and GSS data, we specifically chose to represent age as a categorical variable based on which age range an individual was a part of. This allowed us to stratify voters specifically into definitive cells and allow evaluation of the voting preferences within each cell. Furthermore, if age was considered as a non-categorical variable, we would be assuming it would have a linear effect on the voting outcome. However, different political platforms proposed by the Liberals or Conservatives may vary in their effect on each age group non-linearly. 
+
+The two logistic models created from CESweb data was post-stratified using the Canadian general social survey data. Individual respondents were stratified by province, age range, sex, and education and the multilevel logistic regression model was used to predict the voting preference within each strata. This procedure allowed for the extrapolation of CESweb data and simulate the overall precentage of Liberal and Conservative supporters within each province during the 2019 federal election.  
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+#Post-Stratification Liberal 
+gss_dataL <- gss_data
+gss_dataL$logodds_estimate <-
+  model1 %>%
+  predict(newdata = gss_dataL)
+
+gss_dataL$estimate <-
+  exp(gss_dataL$logodds_estimate)/(1+exp(gss_dataL$logodds_estimate))
+
+
+#Post-Stratification Conservative 
+gss_dataC <- gss_data
+gss_dataC$logodds_estimate <-
+  model2 %>%
+  predict(newdata = gss_dataC)
+
+gss_dataC$estimate <-
+  exp(gss_dataC$logodds_estimate)/(1+exp(gss_dataC$logodds_estimate))
+
+```
+The MRP method is effective at extrapolating trends from survey data, adjusting for  non-representative samples to better analyse the (Alexander R. 2020). The purpose of our study is to assess the likelihood of a selected individual from a specific strata in voting Liberal or Conservative. In our first level model, we chose to use a logistic regression. Logistic regression models are typically more robust than linear regression models when predicting binomial outcomes. As a result, modeling using a logistic regression is preferred. In our model, we decided to use education, age and sex to predict voting outcomes for Liberals and Conservatives.  These values were mainly chosen simply because they were the only values that could be mapped from the CES survey data to the GSS data. Education was incorporated as a categorical variable based on whether the respondent had obtained a highschool diploma, undergraduate degree, or a graduate degree or more. Furthermore, despite being a continuous variable in both CESweb and GSS data, we specifically chose to represent age as a categorical variable based on which age range an individual was a part of. If we had considered it as a continuous variable in our model, it would be stating that age was only linearly correlated with voting outcomes. However, the relationship between age and voting preference may not be linear as different political platforms proposed by the Liberals or Conservatives vary in their effect on each age group. For instance, individuals of middle age may prefer to vote Conservative while younger and older individuals may prefer to vote Liberal. 
+
+
+## Results
+Running the logistic regression models created from CESweb data, we were able to determine several significant features about individuals who support either Liberals or Conservatives in the 2019 election. 
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+#Intercept values for our logistic model equation for voting liberal
+
+Equation_values1<-coef(summary(model1))[,1]
+Equation_values1<-data.frame(as.list(Equation_values1))
+P_Values1<-coef(summary(model1))[,4]
+P_Values1<-data.frame(as.list(P_Values1))
+
+P_Values1 <- pivot_longer(P_Values1, cols = 1:13, names_to = "Coefficients", values_to = "P-value")
+Equation_values1 <- pivot_longer(Equation_values1, cols = 1:13, names_to = "Coefficients",
+                                 values_to =   "intercept")
+equationL <- merge(P_Values1,Equation_values1, by = "Coefficients")
+
+equationL$Coefficients[equationL$Coefficients == "age_range30.39"] <- "age 30-39"
+equationL$Coefficients[equationL$Coefficients == "age_range40.49"] <- "age 40-49"
+equationL$Coefficients[equationL$Coefficients == "age_range50.59"] <- "age 50-59"
+equationL$Coefficients[equationL$Coefficients == "age_range60.69"] <- "age 60-69"
+equationL$Coefficients[equationL$Coefficients == "age_range70.79"] <- "age 70-79"
+equationL$Coefficients[equationL$Coefficients == "age_range80.89"] <- "age 80-89"
+equationL$Coefficients[equationL$Coefficients == "age_range90.99"] <- "age 90-99"
+
+equationL$Coefficients[equationL$Coefficients == "educationHighschool"] <- "Highschool Diploma"
+equationL$Coefficients[equationL$Coefficients == "educationNA"] <- "Education NA Value"
+equationL$Coefficients[equationL$Coefficients == "educationNo.Highschool"] <- "No   Highschool Diploma"
+equationL$Coefficients[equationL$Coefficients == "educationUndergraduate"] <- "Undergraduate Degree"
+equationL$Coefficients[equationL$Coefficients == "X.Intercept."] <- "Y Intercept"
+
+
+
+kable(equationL, caption = "Table 2: Liberal Logistic Equation Values")
+
+```
+
+Table 2 demonstrates the logistic equation values that predict the probability of an individual to vote Liberal. The intercept value of the equation represents the y-value of a female individual with a graduate level education or higher between the ages of 18-29.Compared to individuals between the age of 18-29, individuals between the ages of 30-89, were significantly less likely to vote Liberal (P < 0.05). Furthermore, there appears to be a significant positive correlation between degree of education and the likelihood of an individual to support the Liberals. Individuals with a highschool diploma or less are significantly less likely to have voted Liberal during the 2019 election with weight values greater than -0.5 (P < 0.001). This decrease in Liberal preference is somewhat diminished in individuals with an undergraduate degree, showing only a -0.1 weight value and much less degree of statistical significance (P  <0.05). Interestingly, according to the model, males are also slightly less likely to vote Liberals than females (P < 0.001), demonstrating a potential bias in Liberal policies towards women
+
+
+When running the logistic regression model on the probability of a person to vote Conservative, we described the impacts of age, education, and sex on voter outcomes. 
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+#Intercept values for our logistic model equation for voting conservative
+
+Equation_values2<-coef(summary(model2))[,1]
+Equation_values2<-data.frame(as.list(Equation_values2))
+P_Values2<-coef(summary(model2))[,4]
+P_Values2<-data.frame(as.list(P_Values2))
+
+P_Values2 <- pivot_longer(P_Values2, cols = 1:13, names_to = "Coefficients", values_to = "P-value")
+Equation_values2 <- pivot_longer(Equation_values2, cols = 1:13, names_to = "Coefficients",
+                                 values_to =   "intercept")
+equationC <- merge(P_Values2,Equation_values2, by = "Coefficients")
+equationC$Coefficients[equationC$Coefficients == "age_range30.39"] <- "age 30-39"
+equationC$Coefficients[equationC$Coefficients == "age_range40.49"] <- "age 40-49"
+equationC$Coefficients[equationC$Coefficients == "age_range50.59"] <- "age 50-59"
+equationC$Coefficients[equationC$Coefficients == "age_range60.69"] <- "age 60-69"
+equationC$Coefficients[equationC$Coefficients == "age_range70.79"] <- "age 70-79"
+equationC$Coefficients[equationC$Coefficients == "age_range80.89"] <- "age 80-89"
+equationC$Coefficients[equationC$Coefficients == "age_range90.99"] <- "age 90-99"
+
+equationC$Coefficients[equationC$Coefficients == "educationHighschool"] <- "Highschool Diploma"
+equationC$Coefficients[equationC$Coefficients == "educationNA"] <- "Education NA Value"
+equationC$Coefficients[equationC$Coefficients == "educationNo.Highschool"] <- "No   Highschool Diploma"
+equationC$Coefficients[equationC$Coefficients == "educationUndergraduate"] <- "Undergraduate Degree"
+equationC$Coefficients[equationC$Coefficients == "X.Intercept."] <- "Y Intercept"
+
+
+
+kable(equationC, caption = "Table 3: Conservative Logistic Equation Values")
+
+
+```
+Table 3 is the equation values of the generated logistic model with the intercept value representing the Y value for a female individual between the ages of 18-29. Generally speaking, individuals who were more likely to have supported the Conservatives in the 2019 election were less likely to support the Liberals. Individuals between the ages 30-89 were significantly more likely to vote Liberals compared to young adults(P < 0.001). In addition, a lower degree of voter education was also significantly correlated with a greater probability to have supported the Conservative; individuals with an undergraduate degree or less showed increasing interests in the 2019 Conservative Party (P < 0.01). Males were also significantly more likely than females to vote Conservatives in the 2019 election, showing a significant weight value of +0.39 (P<0.001). As thus, according to our model individuals who are male, without a highschool diploma, and between the ages of 30-89 were the most likely group of individuals to vote Conservative in the 2019 election
+
+
+
+Upon post stratifying the Liberal logistic regression model, we were able to simulate a 2019 Liberal popularity vote outcome based on province. 
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width = 7}
+#Predicted popular vote
+Liberal <- sum(gss_dataL$estimate*gss_dataL$n)/sum(gss_dataL$n)
+
+Liberal_Data <- ces_data %>%
+  group_by(province, Vote_Liberal) %>%
+  summarise(n = n()) %>% 
+  group_by(province) %>% 
+  mutate(prop =n/sum(n)) %>%
+  filter(Vote_Liberal==1)
+
+#graphing 
+gss_dataL %>%
+  ggplot(aes(y = sum(estimate*n)/sum(n),x =forcats::fct_inorder(province),color = "MRP Liberal Popular Vote in Canda")) +
+  geom_point() +
+  ggtitle("Graph 1: Proportion of Liberal Voters per province") +
+  ylab("Proportion Liberal Votes") +
+  xlab("Province") +
+  geom_point(data = Liberal_Data,
+             aes(province, prop,color ="MRP Liberal popular Vote by Province")) +
+  theme_minimal() +
+  scale_color_brewer(palette ="Set1") +
+  theme(legend.position ="bottom") +
+  theme(legend.title =element_blank()) +
+  theme(axis.text.x=element_text(angle=90, hjust=1))
+
+Ldrops <- c("Vote_Liberal", "n")
+L_Popularity<- Liberal_Data[ , !(names(Liberal_Data) %in% Ldrops)]
+L_Popularity <- L_Popularity %>%
+  rename(L_pop=prop)
+
+```
+According to our MRP prediction, the overall national Liberal popularity vote was indicated at 37.89%. A majority of Liberal supporters seemed to have come from Nova Scotia, Ontario, Quebec and Newfoundland and Labrador. Furthermore, very few individuals from Alberta and Saskatchewan seemed to support the Liberals. 
+
+
+Similar post-stratification was also performed using the Conservative logistic model and we were able to model for an increased voter turn out in the 2019 election. 
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width = 7}
+#Predicted popular vote
+Conservative= sum(gss_dataC$estimate*gss_dataC$n)/sum(gss_dataC$n)
+
+Conservative_Data <- ces_data %>%
+               group_by(province, Vote_Conservative) %>%
+               summarise(n = n()) %>% 
+               group_by(province) %>% 
+               mutate(prop =n/sum(n)) %>%
+               filter(Vote_Conservative==1)
+
+gss_dataC %>%
+  ggplot(aes(y = sum(estimate*n)/sum(n),x =forcats::fct_inorder(province),color = "MRP Conservative Popular Vote in Canda")) +
+  geom_point() +
+  ggtitle("Graph 1: Proportion of Conservative Voters per province") +
+  ylab("Proportion Conservative Votes") +
+  xlab("Province") +
+  geom_point(data = Conservative_Data,
+             aes(province, prop,color ="MRP Conservative popular Vote by Province")) +
+  theme_minimal() +
+  scale_color_brewer(palette ="Set1") +
+  theme(legend.position ="bottom") +
+  theme(legend.title =element_blank()) +
+  theme(axis.text.x=element_text(angle=90, hjust=1))
+
+Cdrops <- c("Vote_Conservative", "n")
+C_Popularity<- Conservative_Data[ , !(names(Conservative_Data) %in% Cdrops)]
+C_Popularity <- C_Popularity %>%
+  rename(C_pop=prop)
+
+
+```
+According to the model the overall national popularity vote, Conservatives would have obtained around 35.63% of the votes nation-wide. However, it would seem that a majority of Conservative supporters are located in both Alberta and Saskatchewan, with the Conservatives leading the majority of the votes in Alberta. Across the other provinces, the Conservative support is considerably weaker. Especially in Nova Scotia and PEI. 
+
+
+
+```{r table4, r, echo=FALSE, message=FALSE, warning=FALSE}
+#Election total seats vote ridings per province 
+province <- c("Alberta", "British Columbia", "Manitoba", "New Brunswick","Newfoundland and Labrador","Nova Scotia","Ontario","Prince Edward Island","Quebec","Saskatchewan")
+
+provincial_seats <- c(34, 42, 12, 7,34,9, 121, 5, 72, 10)
+
+seating_per_province <- data.frame(province, provincial_seats)
+
+seating_per_province$Conservative = C_Popularity$C_pop
+seating_per_province$Liberal = L_Popularity$L_pop
+
+#calculate seats per party 
+Seatings_Election <- seating_per_province
+
+Seatings_Election$Liberal <- round((Seatings_Election$Liberal)*(Seatings_Election$provincial_seats))
+Lib_TOTAL <- sum(Seatings_Election$Liberal)
+
+
+Seatings_Election$Conservative <- round((Seatings_Election$Conservative)*(Seatings_Election$provincial_seats))
+Con_TOTAL <- sum(Seatings_Election$Conservative)
+
+#Seatings_Election$Other <- (Seatings_Election$provincial_seats - #Seatings_Election$Conservative - Seatings_Election$Liberal)
+#Other_Total <- sum(Seatings_Election$Other)
+
+seat_Total <- data.frame("Total", sum(Seatings_Election$provincial_seats), Con_TOTAL, Lib_TOTAL)
+names(seat_Total) <- c('province', 'provincial_seats', 'Conservative', 'Liberal')
+
+
+Election_Outcome <- rbind(Seatings_Election, seat_Total) %>%
+  rename(Province = province,
+         Seats = provincial_seats)
+kable(Election_Outcome, caption = "Table 4: 2019 Election Outcome with Full Voter Turnout")
+
+```
+Using our MRP estimates, we simulated the provincial popular vote of both the Liberal and Conservatives and thus the overall election outcome, Table 4. In our theoretical 100% voter turnout model, the Liberals seemed to still beat the Conservatives in the election, scoring 120 seats to 101 with a vast amount of Liberal seats coming from Quebec and Ontario. Unfortunately, despite being significantly favoured within both Alberta and Saskatchewan, the Conservatives could not win with those seats alone. Especially due to the low amount of representative seats from these provinces. However, large amounts of non-Liberal and non-Consercative seats still are unaccounted in both Ontario and Quebec, possibly demonstrating high amounts of voter indecision, or preferences towards one of the parties not investigated in our study. 
+
+
+##Discussion 
+#Summary
+In our study we performed multilevel modeling on data from the Candian Election study data set, generating two first level logistic regression model predicting voting outcome for the Liberals and Conservatives by age, sex and education and a second level linear regression model . Using the model, we then took the stratified GSS data as input and assigned voting probability values to each strata. The voting distributions of the stratas were then re-weighed based on the number of individuals within each strata in order to simulate the 2019 federal election. From our work, we were then able to determine the estimated popular voting outcomes for both the Liberals and the Conservatives provincially and nationally. Using the popular vote, we then determined the seating distributions of the two major parties across all the provinces in order to generate an approximated election outcome. In our process, we were able to see the Liberals winning the election with 120 votes and the Conservatives trailing with 101. 
+
+
+#Conclusion 
+In conclusion, voter turnout of the 2019 federal election would not have changed the overall outcome of the election and the Liberals would have still won a minority government. However voter turnout would have increased support for both the Liberals and Conservatives. Potentially having resulted in an increase in Liberal and Conservative seats in the house of commons.
+
+The logistic regression models generated from the CESweb data were accurate at predicting whether a person was going to vote Liberal or Conservative and results aligned with the target demographics of each party. The demographic with the highest percentage the Liberal supporters were highly educated young females. In the 2019 election, the Liberal political platform proposed policies to address affordable housing, early childcare support opportunities, and basic income. Young parents tend to favour Liberals due to their need for housing and early childcare benefits, especially for mothers. On the other hand, factors that increased an individual's preference towards the Conservatives were being males, between ages of 30-89, with lower degrees of education exhibited. These individuals are of working age and most likely did not utilize or understand the importance of education. Liberal policies typically invest more in government intervention strategies and education, causing increases to taxes, greatly influencing these individuals to vote Conservative. Thus, the correlation between simulated voter preference and the 2019 political platforms suggest that our logistic regression was accurate at modeling the voting probabilities of each strata. 
+
+Results from the provincial voting patterns also followed similar voting patterns of the original election, suggesting post stratified results were accurate as well. Conservatives were heavy favourites in areas such as Alberta and Saskatchewan. During the 2019 election,  the Liberals advocated to maintain carbon taxes while the Conservatives proposed to drop them to incentivize the mining of fossil fuels. The fossil fuel industry makes up a majority of the employment opportunities within Alberta and Saskatchewan and as a result, this has made the Conservative results dominant within these provinces. A similar pattern can be seen when comparing our simulated voting patterns to that of  2019 voting results (Crider et. Al 2019). This suggested that our model accurately represented voting outcomes within each province. 
+
+Intriguingly, while we’ve confirmed that the Liberals would have won the election in the case of increased voter outcome, the overall number of seats both the Liberals and the Conservatives hold in the final standings are considerably lower. According to the actual 2019 election results, the Liberals won a 157 seat minority within the house of commons and a 33.1% popular vote while the Conservatives had 121 seats and a 34.4% vote share. However, our model for 100% voter turnout only predicted a 120 Liberal seating with 37.9% national popular vote and a 101 Conservative seating with 35.6% national popular vote. Generally speaking, true seating results tend to be more extreme than the popular vote results. The discrepancy between our modeled outcomes and the actual 2019 outcome may be a result of estimating the total seats won in a province by popular vote. However, the total popular vote percentage of both parties wouldn’t be affected by this method. From our simulated election, we were able to conclude that total Liberal and Conservative support was most likely underrepresented in the 2019 election. Thus, voting outcomes may have increased the total popular vote of the Liberals and the Conservatives. 
+
+Given that the Liberals saw a greater increase in national popular vote than the Conservatives when compared to the actual 2019 election results. We performed an additional investigation using the CESweb data to help explain the phenomenon.
+```{r, echo = FALSE}
+#Abbreviate Province Names 
+ces_I <- ces_data %>%
+  rename(Province = province)
+ces_I$Province[ces_I$Province == "Alberta"] <- 'AB'
+ces_I$Province[ces_I$Province == "British Columbia"] <- 'BC'
+ces_I$Province[ces_I$Province == "Manitoba"] <- 'MB'
+ces_I$Province[ces_I$Province == "New Brunswick"] <- 'NB'
+ces_I$Province[ces_I$Province == "Newfoundland and Labrador"] <- 'NL'
+ces_I$Province[ces_I$Province == "Nova Scotia"] <- 'NS'
+ces_I$Province[ces_I$Province == "Ontario"] <- 'ON'
+ces_I$Province[ces_I$Province == "Prince Edward Island"] <- 'PEI'
+ces_I$Province[ces_I$Province == "Quebec"] <- 'QC'
+ces_I$Province[ces_I$Province == "Saskatchewan"] <- 'SK'
+
+#Voter interest for liberals 
+ces_L <- ces_I %>%
+  filter(Vote_Liberal == 1) %>%
+  drop_na(Voting_Interest)
+
+ces_L <- ces_L %>%
+  select(Province,Voting_Interest) 
+
+ces_L <- aggregate(ces_L[,2:2], list(ces_L$Province), mean)
+
+ces_L <- ces_L %>%
+  rename(Province = Group.1,
+         liberal = Voting_Interest)
+
+#Voter interest for conservatives 
+ces_C <- ces_I %>%
+  filter(Vote_Conservative == 1) %>%
+  drop_na(Voting_Interest)
+
+ces_C <- ces_C %>%
+  select(Province,Voting_Interest) 
+
+ces_C <- aggregate(ces_C[,2:2], list(ces_C$Province), mean)
+ces_C <- ces_C %>%
+  rename(Province = Group.1,
+         conservative = Voting_Interest)
+
+
+#Plotting Combined Voter Interest 
+ces_Interest <- merge(ces_L,ces_C, by= "Province")
+ces_Interest <- melt(ces_Interest)
+names(ces_Interest)[3] <- "Voting_Interest"
+ggplot(ces_Interest, aes(x = Province, y= Voting_Interest, fill = variable), xlab="Age  Group") + 
+  geom_bar(stat="identity", width=.5, position = "dodge") 
+
+
+```
+Graph 3. Is an illustrative representation of the mean voting interest of both Liberal and Conservative supporters by province according to survey data. The leading inhibitor of voter participation is disinterest in elections (Uppal et. Al 2011). As a result, voting interest is roughly positively correlated with voter turnout. From our analysis, it was apparent that within a majority of the provinces, Liberal supporters experience lower amounts of voting interest than Conservative supporters. This suggests that the 2019 election results might have underrepresented Liberal supporters more than Conservative supporters and account for the reason why the Liberals won the popular vote in MRP estimate. 
+
+#Limitations and Next steps
+
+As mentioned briefly in Section 2 (Methods) a major limitation in our MRP procedure is our method of mapping gender to sex. All men were mapped to male and all women and other genders were mapped to female. There are distinct differences between gender and sex. For example, A transgender may identify as a man despite being biologically female. This non-binary value for gender highlights a specific subset of the population that hasn’t been accurately accounted for in our simulated 2019 election. As a result, better methods of mapping sex to gender could be applied, as discussed in a previous paper by Kennedy et Al. 2020. Alternatively a different dataset containing gender could be used to post-stratify our survey data, thus getting rid of the need to map gender to sex. Another weakness in our method is the use of the provincial popular vote to determine the amount of seats earned by the Conservatives and Liberals within each province. Judging political seating within a province by popular vote tends to underestimate the amount of seats obtained by well supported parties and overestimate the amount of seats earned by less supported ones. Normally in Canada, a seat is determined by the popular vote within a respective electoral district. To better model for total seats obtained by each party, use of a survey and post-stratification data set specifying respondent’s electoral district could help determine the outcomes of each riding. 
+
+Given that our study only predicted voting outcomes for the Liberals and Conservatives, it fails to describe voting patterns of other major parties such as the Bloc Quebecois, the NDP and the Green party. While it was statistically unlikely for these parties to become the governing or opposition party in the 2019 election, they still account for much of the missing seats in our 100% voter turnout simulation. In the 2019 election a majority of the seats in Quebec were dominated by the Bloc Quebecois (Crider et. Al 2019). Since our estimates don’t account for the presence of the Bloc Quebecois, a lot of unaccounted seats exist in Quebec. Such unaccounted seats may represent the proportion of seats that are occupied by other parties, however they may also represent the amount of indecisive voters within the province. As such, to get a clearer picture of a 2019 election, future analysis on voter turnout should account for additional parties and improve on our methods by using Canadian Census instead of GSS data. 
+
+
+## References =
+
+Pammett, Jon H. and Lawrence LeDuc. 2003. Explaining the Turnout Decline in Canadian Federal Elections: A New Survey of Non-Voters. Ottawa. Elections Canada. 79 p. (accessed December 8, 2020).
+
+Fowler, Anthony George. 2013. Five Studies on the Causes and Consequences of Voter Turnout. Doctoral dissertation, Harvard University. 
+https://dash.harvard.edu/bitstream/handle/1/11156810/Fowler_gsas.harvard_0084L_10773.pdf?sequence=3
+
+Institute for Democracy and Electoral Assistance. (2018, October 12). Voter Turnout Database. Retrieved December 22, 2020, from https://www.idea.int/data-tools/data/voter-turnout
+
+Stephenson, Laura B; Harell, Allison; Rubenson, Daniel; Loewen, Peter John, 2020, "2019 Canadian Election Study - Phone Survey", https://doi.org/10.7910/DVN/8RHLG1, Harvard Dataverse, V1,
+
+Hodgetts, P. A., & Alexander, R. (2020, September 3). cesR: An R package for the Canadian Election Study. https://doi.org/10.31235/osf.io/a29h8
+
+Statistics Canada. (2019) The General Social Survey: An Overview, 2019
+
+Kennedy L., Khanna K., Simpson D., Gelman A. Using sex and gender in survey adjustment (2020) 
+
+
+Parliament of Canada.(2020) Party Standings in the House of Commons. Retrieved December 20, 2020, from https://www.ourcommons.ca/Members/en/party-standings
+
+Crider M, Ryan A, Sardesai M. (2019). Federal election 2019 live results (1140872517 859060223 E. Haggarty, Ed.). Retrieved December 19, 2020, from https://newsinteractives.cbc.ca/elections/federal/2019/results/
+
+Lori Culbert, Nick Eagland, Gordon Hoekstra, Joanne Lee-Young, Derrick Penner, Jennifer Saltman. Vancouver Sun. (Electronically Published Oct 04, 2019) Election 2019: Where the Liberals, Conservatives, NDP and Greens stand on key issues for B.C. from 
+https://vancouversun.com/news/politics/election-2019/election-2019-where-the-liberals-conservatives-ndp-and-greens-stand-on-12-key-issues-for-b-c
+
+Uppal, Sharanjit & LaRochelle-Côté, Sébastien. Statistics Canada, (2012). Factors associated with voting. 13. 
+
+
+
+
+
+
+
